@@ -23,7 +23,7 @@ public class MaClasseTest extends TestCase {
     static List utilTemp3 = new ArrayList();
 
     public static void testListDivider() throws Exception {
-        
+
         //sourceIn :
         //["string",'c',[1,Object],["lonelyString"]]
         Object obj = new Object();
@@ -36,7 +36,6 @@ public class MaClasseTest extends TestCase {
         utilTemp = new ArrayList();
         utilTemp.add("lonelyString");
         sourceIn.add(utilTemp);
-
 
         //expectedOut with 2 as value for partsSize parameter:
         //[["string",'c'],[[1,Object],["lonelyString"]]]
@@ -54,6 +53,11 @@ public class MaClasseTest extends TestCase {
         utilTemp2.add(utilTemp3);
         expectedOut.add(utilTemp2);
 
+        System.out.println("...");
         assertEquals(expectedOut, ListDivider.divide(sourceIn, 2));
+        System.out.println("1 passed");
+        System.out.println("...");
+        assertEquals(sourceIn, ListDivider.divide(sourceIn, 0));
+        System.out.println("2 passed");
     }
 }

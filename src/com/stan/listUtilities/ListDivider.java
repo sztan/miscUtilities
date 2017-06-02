@@ -13,22 +13,25 @@ import java.util.ListIterator;
  *
  * @author stan
  */
-
 public final class ListDivider {
-    
-    private ListDivider () {
+
+    private ListDivider() {
     }
-    
+
     private static ListIterator it;
-   
-    public static List<List> divide (List sourceList, int partsSize) {
+
+    public static List<List> divide(List sourceList, int partsSize) {
         //testing valid partsSize
         try {
-            if (partsSize <1) throw new Exception ("blah blah");
+            if (partsSize < 1) {
+                partsSize = 1;
+                throw new Exception("The size for the subLists must be at least 1: \r\n\tpartsSize has been set to 1");
+            }
         } catch (Exception e) {
-            
+            //could use a logging system here
+            System.out.println(e.getMessage());
         } ///////////////////////
-        
+
         //go
         it = sourceList.listIterator();
         int i = 1;
@@ -36,15 +39,19 @@ public final class ListDivider {
         List intermediateList = new ArrayList();
         while (it.hasNext()) {
             intermediateList.add(it.next());
-            //System.out.println(it.next());
-        // System.out.println(intermediateList);
-            if(i==partsSize) {
+            if (i == partsSize && partsSize != 1) {
                 resultsList.add(intermediateList);
                 intermediateList = new ArrayList();
-                i=0;
-            } 
-            i++;
+                i = 0;
+            }
+            if (partsSize != 1) {
+                i++;
+            }
         }
-        return resultsList;
+        if (partsSize != 1) {
+            return resultsList;
+        } else {
+            return intermediateList;
+        }
     }
 }
