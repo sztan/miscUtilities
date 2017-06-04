@@ -7,6 +7,7 @@ package com.stan.test;
 
 import com.stan.listUtilities.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
 
@@ -16,48 +17,117 @@ import junit.framework.TestCase;
  */
 public class MaClasseTest extends TestCase {
 
+    static boolean error;
     static List sourceIn = new ArrayList();
-    static List expectedOut = new ArrayList();
-    static List utilTemp = new ArrayList();
-    static List utilTemp2 = new ArrayList();
-    static List utilTemp3 = new ArrayList();
+    static List<List> expectedOut;
+    static Object obj = new Object();    
 
     public static void testListDivider() throws Exception {
 
-        //sourceIn :
-        //["string",'c',[1,Object],["lonelyString"]]
-        Object obj = new Object();
+        System.out.println("com.stan.test.MaClasseTest.testListDivider()\r\n");
 
-        sourceIn.add("string");
-        sourceIn.add('c');
-        utilTemp.add(1);
-        utilTemp.add(obj);
-        sourceIn.add(utilTemp);
-        utilTemp = new ArrayList();
-        utilTemp.add("lonelyString");
-        sourceIn.add(utilTemp);
+        //sourceIn:
+        //["string",'c',[1,Object],["mouse"]]
+        sourceIn
+            = new ArrayList(
+                Arrays.asList(
+                    "string",
+                    'c',
+                    Arrays.asList(
+                        1,
+                        obj
+                    ),
+                    Arrays.asList(
+                        "mouse"
+                    )
+                )
+            );
+        
+        //case when partsSize = 1
+        expectedOut
+            = new ArrayList<>(
+                Arrays.asList(
+                    Arrays.asList("string"),
+                    Arrays.asList('c'),
+                    Arrays.asList(
+                        Arrays.asList(
+                            1,
+                            obj
+                        )
+                    ),
+                    Arrays.asList(
+                        Arrays.asList("mouse")
+                    )
+                )
+            );
+        runTest(1, expectedOut, sourceIn, -1);
+        runTest(2, expectedOut, sourceIn, 0);
+        runTest(3, expectedOut, sourceIn, 1);
 
-        //expectedOut with 2 as value for partsSize parameter:
-        //[["string",'c'],[[1,Object],["lonelyString"]]]
-        utilTemp = new ArrayList();
+        //case when partsSize = 2
+        expectedOut
+            = new ArrayList<>(
+                Arrays.asList(
+                    Arrays.asList(
+                        "string",
+                        'c'
+                    ),
+                    Arrays.asList(
+                        Arrays.asList(
+                            1,
+                            obj
+                        ),
+                        Arrays.asList(
+                            "mouse"
+                        )
+                    )
+                )
+            );
+        runTest(4, expectedOut, sourceIn, 2);
+        
+        //case when partsSize = 3        
+        expectedOut
+            = new ArrayList(
+                Arrays.asList(
+                    Arrays.asList(
+                        "string",
+                        'c',
+                        Arrays.asList(
+                            1,
+                            obj
+                        )
+                    ),
+                    Arrays.asList(
+                        Arrays.asList(
+                            "mouse"
+                        )
+                    )
+                )
+            );
+        runTest(5, expectedOut, sourceIn, 3);
+        
+        //case when partsSize >= 4
+        expectedOut
+            = new ArrayList<>(
+                Arrays.asList(sourceIn)
+            );
+        runTest(6, expectedOut, sourceIn, 4);        
+        runTest(7, expectedOut, sourceIn, 5);
+        
+      }
 
-        utilTemp.add("string");
-        utilTemp.add('c');
-        expectedOut.add(utilTemp);
-
-        utilTemp = new ArrayList();
-        utilTemp.add(1);
-        utilTemp.add(obj);
-        utilTemp2.add(utilTemp);
-        utilTemp3.add("lonelyString");
-        utilTemp2.add(utilTemp3);
-        expectedOut.add(utilTemp2);
-
-        System.out.println("...");
-        assertEquals(expectedOut, ListDivider.divide(sourceIn, 2));
-        System.out.println("1 passed");
-        System.out.println("...");
-        assertEquals(sourceIn, ListDivider.divide(sourceIn, 0));
-        System.out.println("2 passed");
+    public static void runTest(int testNumber, List<List> expectedOut, List sourceIn, int partsSize) {
+        System.out.println(" --- running test case #" + String.valueOf(testNumber) + " ---");
+        System.out.println("source:\t\t" + sourceIn + "\r\npartsSize:\t" + partsSize + "\r\nexpectedOut:\t" + expectedOut);
+        try {
+            error = false;
+            assertEquals(expectedOut, ListDivider.divide(sourceIn, partsSize));
+        } catch (Exception e) {
+            System.out.println("\r\n\t" + e.getMessage() + "\r\n");
+            error = true;
+        }
+        if (!error) {
+            System.out.println("\r\n\t" + String.valueOf(testNumber) + " passed\r\n");
+        }
     }
 }
