@@ -6,11 +6,11 @@ for the subLists
 
 **Example**
 
-{
+```
 List sourceList = new LinkedList();
 Object obj = new Object();
 sourceList = ListDivider.divide(new ArrayList(Arrays.asList(1, 2, "stan", obj)), 3);
-}
+```
 
 will return
 
