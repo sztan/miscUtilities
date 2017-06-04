@@ -27,11 +27,11 @@ public class MaClasseTest extends TestCase {
         System.out.println("com.stan.test.MaClasseTest.testListDivider()\r\n");
 
         //sourceIn:
-        //["string",'c',[1,Object],["mouse"]]
+        //["cat",'c',[1,Object],["mouse"]]
         sourceIn
             = new ArrayList(
                 Arrays.asList(
-                    "string",
+                    "cat",
                     'c',
                     Arrays.asList(
                         1,
@@ -47,7 +47,7 @@ public class MaClasseTest extends TestCase {
         expectedOut
             = new ArrayList<>(
                 Arrays.asList(
-                    Arrays.asList("string"),
+                    Arrays.asList("cat"),
                     Arrays.asList('c'),
                     Arrays.asList(
                         Arrays.asList(
@@ -69,7 +69,7 @@ public class MaClasseTest extends TestCase {
             = new ArrayList<>(
                 Arrays.asList(
                     Arrays.asList(
-                        "string",
+                        "cat",
                         'c'
                     ),
                     Arrays.asList(
@@ -90,7 +90,7 @@ public class MaClasseTest extends TestCase {
             = new ArrayList(
                 Arrays.asList(
                     Arrays.asList(
-                        "string",
+                        "cat",
                         'c',
                         Arrays.asList(
                             1,
