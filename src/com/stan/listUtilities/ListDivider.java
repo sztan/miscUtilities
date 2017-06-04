@@ -7,17 +7,12 @@ package com.stan.listUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  *
  * @author stan
  */
 public final class ListDivider {
-
-    public static void divide() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     private ListDivider() {
     }
