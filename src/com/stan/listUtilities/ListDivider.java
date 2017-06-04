@@ -15,6 +15,10 @@ import java.util.ListIterator;
  */
 public final class ListDivider {
 
+    public static void divide() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private ListDivider() {
     }
 
