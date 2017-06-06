@@ -41,6 +41,6 @@ targetList = ListDivider.divide(new ArrayList(
 
 once the `.jar` added to your project, use :
 
-`import import com.stan.listUtilities.ListDivider;`
+`import com.stan.listUtilities.ListDivider;`
 
        
