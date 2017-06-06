@@ -24,27 +24,27 @@ public final class ListDivider {
      * @param sourceList The list to divide.
      * @param partsSize The wished size for each parts.
      * @return A list containing the sublists.
-     * @throws Exception if partsSize is incorrect.
      */
     
-    public static List<List> divide (List sourceList, int partsSize) throws Exception {
+    public static List<List> divide (List sourceList, int partsSize) {
        
        //first check if partsSize is valid        
         try {
-            if (partsSize < 1) {
+            if (partsSize < 1) { // negative or zero values changed to 1
                 partsSize = 1;
                 throw new Exception("The size for the subLists must be at least 1: partsSize has been set to 1");
-            } else if (partsSize > sourceList.size()) {
+            } else if (partsSize > sourceList.size()) { // bigger than source size values changed to list size
                 partsSize = sourceList.size();
                 throw new Exception("The size for the subLists must be at most the list size: partsSize has been set to " + sourceList.size());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        //ready
         
-        
-        int completeParts = sourceList.size() / partsSize; //will be as many subLists
-        int remainingElements = sourceList.size() % partsSize; // the possibly more little last sublist
+        //quick analysis:
+        int completeParts = sourceList.size() / partsSize; //will be as many complete subLists
+        int remainingElements = sourceList.size() % partsSize; // the remaining elements
         List<List> resultList = new ArrayList<>();
         
         int turn = 1;
